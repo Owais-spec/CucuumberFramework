@@ -4,6 +4,7 @@ import org.junit.Assert;
 
 import io.cucumber.java.en.*;
 import pages.SauceDemoLoginPage;
+import utilities.BrowserUtils;
 import utilities.Driver;
 import utilities.PropertiesReader;
 
@@ -12,6 +13,8 @@ import utilities.PropertiesReader;
 public class SuaceDemoLoginSteps {
 	
 	SauceDemoLoginPage page = new SauceDemoLoginPage();
+	BrowserUtils utils = new BrowserUtils();
+	
 	// Valid test #Starts
 	@Given("I am on the SuaceDemo login page")
 	public void i_am_on_the_suace_demo_login_page() {
@@ -41,26 +44,23 @@ public class SuaceDemoLoginSteps {
 	}
 	//Valid Test End
 	
-	//Invalid Test Starts
 	
-	@Given("I am on the SauceDemo login page")
-	public void i_am_on_the_sauce_demo_login_page() {
-
-	}
-
+	// Invalid tests #Starts
 	@When("I enter invalid username {string} password {string}")
-	public void i_enter_invalid_username_password(String string, String string2) {
-
+	public void i_enter_invalid_username_password(String username, String invalidPassword) {
+		page.username.sendKeys(username);
+		page.password.sendKeys(invalidPassword);
 	}
-
 	@Then("I should not be logged in")
 	public void i_should_not_be_logged_in() {
-
+	    Assert.assertTrue(page.username.isDisplayed());
+	    Assert.assertFalse(utils.isElementPresent(page.inventoryPageProductText));
 	}
-
 	@Then("Error message should display {string}")
-	public void error_message_should_display(String string) {
-
+	public void error_message_should_display(String errorMessage) {
+	    Assert.assertEquals(page.errorMessage.getText(), errorMessage);
 	}
+
+	// Invalid test #Ends
 
 }

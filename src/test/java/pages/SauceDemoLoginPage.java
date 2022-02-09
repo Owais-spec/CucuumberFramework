@@ -28,4 +28,7 @@ public class SauceDemoLoginPage {
 	
 	@FindBy (css = ".inventory_item")
 	public List<WebElement> inventoryItems;
+	
+	@FindBy (xpath = "//h3[@data-test='error']")
+	public WebElement errorMessage;
 }
