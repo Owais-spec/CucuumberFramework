@@ -1,3 +1,4 @@
+@Regression
 Feature: Sauce Demo Login
   		This feature focus on positive and nefative login tests
 
